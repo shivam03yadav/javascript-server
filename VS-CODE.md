@@ -1,6 +1,6 @@
 # express-server
 
-Features of VS Code
+# Features of VS Code 
 
 1.A very helpful syntax highlighter and autocomplete feature that provides smart completions based on variable types, function definitions, and imported modules.
 
@@ -19,20 +19,20 @@ Useful Plugins of VS Code
 
 2.Git Easy
   Imports the following git commands for you to use from the command palette. 
-    Git Easy: Init
-    Git Easy: Add Origin
-    Git Easy: Add Remote
-    Git Easy: Add File/Directory
-    Git Easy: Add All Modified
-    Git Easy: Commit
-    Git Easy: Pull Current Branch from Origin
-    Git Easy: Push Current Branch to Origin
-    Git Easy: Push Current Branch (to any remote)
-    Git Easy: Status
-    Git Easy: Create New Branch
-    Git Easy: Change/Checkout Existing Branch
-    Git Easy: Log All
-    Git Easy: Log Current File
+    **Git Easy: Init**
+    **Git Easy: Add Origin**
+    **Git Easy: Add Remote**
+    **it Easy: Add File/Directory**
+    **Git Easy: Add All Modified**
+    **Git Easy: Commit**
+    **Git Easy: Pull Current Branch from Origin**
+    **Git Easy: Push Current Branch to Origin**
+    **Git Easy: Push Current Branch (to any remote)**
+    **Git Easy: Status**
+    **Git Easy: Create New Branch**
+    **Git Easy: Change/Checkout Existing Branch**
+    **Git Easy: Log All**
+    **Git Easy: Log Current File**
 
 3.Sublime Keymap
   This extension will install Sublime Text keyboard shortcuts in VS Code after installing and      restarting.

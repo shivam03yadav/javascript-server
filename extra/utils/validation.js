@@ -21,35 +21,45 @@ const users = [{
 
 ];
 
-let validate = /([a-zA-Z0-9_\-\.]+)@successive[.]tech$/gmi;
-let trueName = [];
-let falseName= [];
 
 
 
 
 let validateEmail =  function(user){
+    let validate = /([a-zA-Z0-9_\-\.]+)@successive[.]tech$/gmi;
     if(user.match(validate)){
-       trueName.push(user);
         return true
         }
 
-    else {
-          falseName.push(user);
+    else { 
           return false;
          }
 
 }
 
 
-
-
 let validateUser = function(users){
 
-    for(let i=0;i<=users.length-1;i++){
+      let trueName = [];
+      let falseName= [];
+    
+      for(let i=0;i<=users.length-1;i++){
         let {traineeEmail,reviewerEmail} = users[i];
-        validateEmail(traineeEmail);
-        validateEmail(reviewerEmail);
+        
+          if(validateEmail(traineeEmail)){
+            trueName.push(traineeEmail);
+           }
+           else{
+            falseName.push(traineeEmail);
+        }
+        
+        if(validateEmail(reviewerEmail)){
+              trueName.push(reviewerEmail);
+           }
+        else{
+            falseName.push(reviewerEmail);
+        }
+
     }
 
 

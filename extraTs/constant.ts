@@ -8,9 +8,4 @@ const permission: IgetUser = {
         delete: [],
     }
 };
-
-
-
-
-
 export { permission };

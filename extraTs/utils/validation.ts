@@ -1,10 +1,4 @@
-
-
-
-
 import { validateEmail } from './helper';
-
-
 
 const validateUser = (users) => {
 
@@ -30,7 +24,6 @@ const validateUser = (users) => {
 
   }
 
-
   console.log(`Number of valid users ${trueName.length}`);
   trueName.forEach(element => { console.log(element); });
 
@@ -38,6 +31,5 @@ const validateUser = (users) => {
   falseName.forEach(element => { console.log(element); });
 
 };
-
 
 export default validateUser;

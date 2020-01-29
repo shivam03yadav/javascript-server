@@ -6,9 +6,4 @@ const permission = {
         delete: [],
         }
  }
-
-
-
-
-
 export {permission};

@@ -1,5 +1,4 @@
-var rows = Number(process.argv[2])
-n = rows
+let equilateral = function(n){
 var s=n-1
 var st = " "
 for(var i=1;i<=n;i++)
@@ -14,3 +13,6 @@ for(var i=1;i<=n;i++)
          st = st + "* "
     console.log(st + "\n")
 }
+}
+
+export default equilateral;

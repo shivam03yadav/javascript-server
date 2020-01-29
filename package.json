@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "execute":"node extra/patterns/diamond.js",
-     "execute1":"node extra/patterns/equilateral.js"
+    "diamond": "node extra/patterns/diamond.js",
+    "equilateral": "node extra/patterns/equilateral.js",
+    "run-extra": "npx babel-node extra"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/shivam03yadav/javascript-server/issues"
   },
-  "homepage": "https://github.com/shivam03yadav/javascript-server#readme"
+  "homepage": "https://github.com/shivam03yadav/javascript-server#readme",
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/node": "7.8.3",
+    "@babel/preset-env": "7.8.3"
+  },
+  "type": "module"
 }

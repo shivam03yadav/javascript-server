@@ -1,5 +1,4 @@
-var rows = Number(process.argv[2])
-n = rows
+let diamond = function(n){
 var s=n-1
 var st = " "
 for(var i=1;i<=n;i++)
@@ -29,3 +28,5 @@ st = ""
      
     console.log(st + "\n");
 }
+}
+export default diamond;

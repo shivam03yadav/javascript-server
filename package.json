@@ -11,7 +11,7 @@
     "execute3": "node extra/utils/permission.js",
     "execute4": "npx babel-node extra",
     "start:extra": "babel-node extra",
-    "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "start:server": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
     "nodemon": "nodemon ./dist/index.js",
     "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
     "lint:fix": "npm run lint --fix"
@@ -34,6 +34,8 @@
     "babel": "^6.23.0",
     "babel-node": "0.0.1-security",
     "commitizen": "^4.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "husky": "^4.2.1",
     "nodemon": "^2.0.2",
     "pre-commit": "^1.2.2",

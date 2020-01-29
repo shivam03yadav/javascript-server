@@ -3,7 +3,6 @@ import equilateral from './patterns/equilateral';
 import { hasPermission, validateUser } from './utils/index';
 import { Iuser } from './interfaces';
 
-
 diamond(5);
 equilateral(10);
 hasPermission('getUsers', 'trainer', 'read');

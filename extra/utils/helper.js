@@ -10,6 +10,4 @@ let validateEmail =  function(user){
          }
 
 }
-
-
 export {validateEmail};

@@ -7,7 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "diamond": "node extra/patterns/diamond.js",
     "equilateral": "node extra/patterns/equilateral.js",
-    "run-extra": "npx babel-node extra"
+    "run-validation": "node extra/utils/validation.js",
+    "run-permission": "node extra/utils/permission.js",
+    "run-extra": "npx babel-node extra",
+    "start:extra": "babel-node extra",
+    "start:extraTs": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "nodemon": "nodemon ./dist/index.js",
+    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
+    "lint:fix": "npm run lint --fix",
+    "pre-commit": "npm run lint && npm test",
+    "pre-push": "npm run lint && npm test"
   },
   "repository": {
     "type": "git",
@@ -19,10 +28,23 @@
     "url": "https://github.com/shivam03yadav/javascript-server/issues"
   },
   "homepage": "https://github.com/shivam03yadav/javascript-server#readme",
-  "devDependencies": {
-    "@babel/core": "7.8.3",
-    "@babel/node": "7.8.3",
-    "@babel/preset-env": "7.8.3"
+  "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@types/node": "^13.5.0",
+    "babel": "^6.23.0",
+    "babel-node": "0.0.1-security",
+    "commitizen": "^4.0.3",
+    "express": "^4.17.1",
+    "husky": "^4.2.1",
+    "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
+    "tslint": "^6.0.0"
   },
-  "type": "module"
+  "devDependencies": {
+    "tsc-watch": "^4.1.0",
+    "typescript": "^3.7.5"
+  }
 }

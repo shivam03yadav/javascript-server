@@ -17,5 +17,3 @@ let hasPermission= function(moduleName,role,permissionType){
     }
 
  export default hasPermission;
-    
-    

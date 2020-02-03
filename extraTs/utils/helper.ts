@@ -9,6 +9,4 @@ const validateEmail = (user: string): boolean => {
     }
 
 };
-
-
 export { validateEmail };

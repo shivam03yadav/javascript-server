@@ -17,5 +17,3 @@ const hasPermission = (moduleName: string, role: string, permissionType: string)
 };
 
 export default hasPermission;
-
-

@@ -8,17 +8,6 @@ export default ( config ) => {
         console.log('body is', req.query);
         Object.keys(config).forEach(key => {
             const { regex } = config[key];
-
-            if (config[key].required) {
-
-                if (config[key]=== undefined) {
-                    re
-
-}
-               else{
-
-               }
-            }
         });
         next();
     };

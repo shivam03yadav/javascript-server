@@ -2,8 +2,6 @@ import * as express from 'express';
 import IConfig from './config/IConfig';
 import * as bodyParser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs';
-import mainRouter from './router';
-
 
 class Server {
     app: express.Application;
@@ -19,10 +17,10 @@ class Server {
     setupRoutes(): void {
         this.app.get('/health-check', (req: express.Request, res: express.Response): void => {
             res.send('<h1>I am OK</h1>');
+
+            this.app.use(notFoundRoute);
+            this.app.use(errorHandler);
         });
-        this.app.use('/api', mainRouter);
-        this.app.use(notFoundRoute);
-        this.app.use(errorHandler);
     }
     run(): Server {
         this.app.listen(this.config.port, err => {

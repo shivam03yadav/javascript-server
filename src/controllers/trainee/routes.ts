@@ -8,6 +8,6 @@ traineeRouter.route('/')
     .get(validationHandler(validation.get), TraineeController.list)
     .post(validationHandler(validation.create), TraineeController.create)
     .delete(validationHandler(validation.delete), TraineeController.delete);
-traineeRouter.route('/:id')
+    traineeRouter.route('/:id')
     .put(validationHandler(validation.update), TraineeController.update);
 export default traineeRouter;

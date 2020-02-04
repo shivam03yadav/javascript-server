@@ -65,7 +65,7 @@ const validation = {
             isObject: true,
             custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
                 if (typeof req[reqMethod] !== 'object') {
-                    return next({ error: 'Error Found', message: 'Not an Object' });
+                    return next({ error: 'error Found', message: 'Not an Object' });
                 }
             },
         }

@@ -53,7 +53,7 @@ class TraineeController {
 
             data: [{
                 id: 201,
-                name: 'Ujjawal Jain',
+                name: 'Firoz',
                 address: 'Pune',
             },
             {

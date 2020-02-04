@@ -4,12 +4,10 @@ import { default as validationHandler } from '../../libs/routes/validationHandle
 import validation from './validation';
 
 const traineeRouter = Router();
-
 traineeRouter.route('/')
-    .get(TraineeController.list)
+    .get(validationHandler(validation.get), TraineeController.list)
     .post(validationHandler(validation.create), TraineeController.create)
-    .delete(TraineeController.delete);
+    .delete(validationHandler(validation.delete), TraineeController.delete);
 traineeRouter.route('/:id')
-    .put(TraineeController.update);
-
+    .put(validationHandler(validation.update), TraineeController.update);
 export default traineeRouter;

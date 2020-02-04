@@ -66,5 +66,4 @@ class TraineeController {
         });
     }
 }
-
 export default TraineeController.getInstance();

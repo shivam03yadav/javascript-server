@@ -1,5 +1,7 @@
 import { NextFunction } from 'express';
 
+const errorArray = [];
+
 const validation = {
     create: {
         id: {
@@ -52,7 +54,7 @@ const validation = {
             }
         }
     },
-    update: {
+    update: {  // put
         id: {
             required: true,
             string: true,
@@ -63,9 +65,9 @@ const validation = {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
+            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): string => {
                 if (typeof req[reqMethod] !== 'object') {
-                    return next({ error: 'error Found', message: 'Not an Object' });
+                    return 'Not an Object';
                 }
             },
         }

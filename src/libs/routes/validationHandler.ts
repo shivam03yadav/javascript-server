@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import errorHandler from './errorHandler';
 
 export default (config: any) => {
     return (req: Request, res: Response, next: NextFunction) => {
@@ -12,27 +11,31 @@ export default (config: any) => {
             const keys = Object.keys(config[key]);
             const { regex } = config[key];
             const { in: reqMethod } = config[key];
+            console.log('ye meri value hai', req[reqMethod][key]);
             if (keys.includes('required') && config[key].required === true) {
                 if (req[reqMethod][key] === undefined || req[reqMethod][key] === null) {
-                    errorArray.push({ error: 'input is empty', message: `${key} is required`, status: 400, timeStamp: new Date()});
+                    errorArray.push({message: config[key].errorMessage, location: config[key].in[0],key: `${key}`, value: `${req[reqMethod][key] }`});
                 }
             }
             if (keys.includes('regex')) {
                 if (!regex.test(req[reqMethod][key])) {
-                     errorArray.push({ error: 'Error found in', message: `${key} is invalid`, status: 400, timeStamp: new Date()});
+                    errorArray.push({  message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key] }` });
                 }
             }
-         if (config[key].custom !== undefined) {
-                if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
-                    errorArray.push('Object not found');
-                }
-            }
-        });
 
-        console.log(errorArray);
-        if (errorArray.length !== 0) {
-            next(errorArray);
+
+        if (config[key].custom !== undefined) {
+            console.log('inside custom');
+            if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
+                errorArray.push({ message: `${key} is invalid` });
+            }
         }
-        next();
-    };
+    });
+
+    console.log(errorArray);
+    if (errorArray.length !== 0) {
+        next(errorArray);
+    }
+    next();
+};
 };

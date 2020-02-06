@@ -33,7 +33,7 @@ const validation = {
             number: true,
             regex: /^[0-9]*$/,
             in: ['query'],
-            errorMessage: 'invalid skip',
+            errorMessage: 'Incorrect skip',
             custom: (reqMethod, req: Request, res: Response, next: NextFunction): void => {
                 if (req[reqMethod].skip === undefined) {
                     req[reqMethod].skip = '0';
@@ -46,7 +46,7 @@ const validation = {
             regex: /^[0-9]*$/,
             number: true,
             in: ['query'],
-            errorMessage: 'invalid limit',
+            errorMessage: 'Incorrect limit',
             custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
                 if (req[reqMethod].limit === undefined) {
                     req[reqMethod].limit = '10';

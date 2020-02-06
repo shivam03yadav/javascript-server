@@ -1,7 +1,5 @@
 import { NextFunction } from 'express';
 
-const errorArray = [];
-
 const validation = {
     create: {
         id: {
@@ -33,7 +31,7 @@ const validation = {
             number: true,
             regex: /^[0-9]*$/,
             in: ['query'],
-            errorMessage: 'Incorrect skip',
+            errorMessage: 'invalid skip',
             custom: (reqMethod, req: Request, res: Response, next: NextFunction): void => {
                 if (req[reqMethod].skip === undefined) {
                     req[reqMethod].skip = '0';
@@ -46,7 +44,7 @@ const validation = {
             regex: /^[0-9]*$/,
             number: true,
             in: ['query'],
-            errorMessage: 'Incorrect limit',
+            errorMessage: 'invalid limit',
             custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
                 if (req[reqMethod].limit === undefined) {
                     req[reqMethod].limit = '10';
@@ -65,9 +63,9 @@ const validation = {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): string => {
+            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
                 if (typeof req[reqMethod] !== 'object') {
-                    return 'Not an Object';
+                    return next({ error: 'Error Found', message: 'Not an Object' });
                 }
             },
         }

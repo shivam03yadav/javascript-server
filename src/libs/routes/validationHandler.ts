@@ -33,7 +33,7 @@ export default (config: any) => {
         });
         console.log(errorArray);
         if (errorArray.length !== 0) {
-            const error ={
+            const error = {
                 status: 400,
                 error: errorArray
             };

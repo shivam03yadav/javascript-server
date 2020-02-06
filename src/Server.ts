@@ -3,7 +3,7 @@ import IConfig from './config/IConfig';
 import * as bodyParser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs';
 import mainRouter from './router';
-
+import Database from './libs/Database';
 
 class Server {
     app: express.Application;
@@ -24,15 +24,20 @@ class Server {
         this.app.use(notFoundRoute);
         this.app.use(errorHandler);
     }
-    run(): Server {
-        this.app.listen(this.config.port, err => {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            console.log(`server is running on ${this.config.port}`);
+    run = () => {
+        const { app, config: { port, mongoUri } } = this;
+
+        Database.open(mongoUri).then((res) => {
+            app.listen(this.config.port, (err: string): void => {
+                if (err) {
+                    console.log(err);
+                    throw err;
+                }
+                console.log(`server is running on ${this.config.port}`);
+            });
+        }).catch(err => {
+            console.log(err);
         });
-        return this;
     }
     initBodyParser() {
         const { app } = this;

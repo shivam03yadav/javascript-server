@@ -28,7 +28,7 @@ class TraineeController {
             message: 'Trainee Updated Successfully',
             data: {
                 id: 307,
-                name: 'Aryan Singhal',
+                name: 'Prashant Vashisht',
                 address: 'Ghaziabad',
             }
         });
@@ -66,5 +66,4 @@ class TraineeController {
         });
     }
 }
-
 export default TraineeController.getInstance();

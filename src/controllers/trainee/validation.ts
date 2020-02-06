@@ -52,7 +52,7 @@ const validation = {
             }
         }
     },
-    update: {
+    update: {  // put
         id: {
             required: true,
             string: true,

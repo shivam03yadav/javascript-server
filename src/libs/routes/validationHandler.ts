@@ -6,24 +6,36 @@ export default (config: any) => {
         console.log('Request body is: ', req.body);
         console.log('Request query is: ', req.query);
         console.log('Request parameters are: ', req.params);
+        const errorArray = [];
         Object.keys(config).forEach(key => {
             const keys = Object.keys(config[key]);
             const { regex } = config[key];
             const { in: reqMethod } = config[key];
+            console.log('ye meri value hai', req[reqMethod][key]);
             if (keys.includes('required') && config[key].required === true) {
                 if (req[reqMethod][key] === undefined || req[reqMethod][key] === null) {
-                    return next({ error: 'Error found in', message: `${key} is required` });
+                    errorArray.push({ message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key]}` });
                 }
             }
             if (keys.includes('regex')) {
                 if (!regex.test(req[reqMethod][key])) {
-                    return next({ error: 'Error found in', message: `${key} is invalid` });
+                    errorArray.push({ message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key]}` });
                 }
             }
+
+
             if (config[key].custom !== undefined) {
-                config[key].custom(reqMethod, req, res, next);
+                console.log('inside custom');
+                if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
+                    errorArray.push({ message: `${key} is invalid` });
+                }
             }
         });
-        return next();
+
+        console.log(errorArray);
+        if (errorArray.length !== 0) {
+            next(errorArray);
+        }
+        next();
     };
 };

@@ -31,10 +31,13 @@ export default (config: any) => {
                 }
             }
         });
-
         console.log(errorArray);
         if (errorArray.length !== 0) {
-            next(errorArray);
+            const error = {
+                status: 400,
+                error: errorArray
+            };
+            next(error);
         }
         next();
     };

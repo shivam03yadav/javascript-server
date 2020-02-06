@@ -12,8 +12,8 @@ class Server {
     }
 
     bootstrap(): Server {
-        this.setupRoutes();
         this.initBodyParser();
+        this.setupRoutes();
         return this;
     }
     setupRoutes(): void {

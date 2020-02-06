@@ -14,28 +14,31 @@ export default (config: any) => {
             console.log('ye meri value hai', req[reqMethod][key]);
             if (keys.includes('required') && config[key].required === true) {
                 if (req[reqMethod][key] === undefined || req[reqMethod][key] === null) {
-                    errorArray.push({message: config[key].errorMessage, location: config[key].in[0],key: `${key}`, value: `${req[reqMethod][key] }`});
+                    errorArray.push({ message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key]}` });
                 }
             }
             if (keys.includes('regex')) {
                 if (!regex.test(req[reqMethod][key])) {
-                    errorArray.push({  message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key] }` });
+                    errorArray.push({ message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key]}` });
                 }
             }
 
 
-        if (config[key].custom !== undefined) {
-            console.log('inside custom');
-            if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
-                errorArray.push({ message: `${key} is invalid` });
+            if (config[key].custom !== undefined) {
+                console.log('inside custom');
+                if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
+                    errorArray.push({ message: `${key} is invalid` });
+                }
             }
+        });
+        console.log(errorArray);
+        if (errorArray.length !== 0) {
+            const error ={
+                status: 400,
+                error: errorArray
+            };
+            next(error);
         }
-    });
-
-    console.log(errorArray);
-    if (errorArray.length !== 0) {
-        next(errorArray);
-    }
-    next();
-};
+        next();
+    };
 };

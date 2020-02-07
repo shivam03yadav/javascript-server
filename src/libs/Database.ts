@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import seedData from './seedData';
 
 class Database {
     static open = (mongoUri: string) => {

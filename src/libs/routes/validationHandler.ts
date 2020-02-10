@@ -11,7 +11,6 @@ export default (config: any) => {
             const keys = Object.keys(config[key]);
             const { regex } = config[key];
             const { in: reqMethod } = config[key];
-            console.log('ye meri value hai', req[reqMethod][key]);
             if (keys.includes('required') && config[key].required === true) {
                 if (req[reqMethod][key] === undefined || req[reqMethod][key] === null) {
                     errorArray.push({ message: config[key].errorMessage, location: config[key].in[0], key: `${key}`, value: `${req[reqMethod][key]}` });

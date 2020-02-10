@@ -19,9 +19,11 @@ class UserRepository {
     }
 
     update = (id: string, data: any) => {
-        return this.userModel.findOneAndUpdate({_id: id}, data);
+        return this.userModel.findOneAndUpdate({ _id: id }, data);
     };
-
+    findOne = (id: string) => {
+        return this.userModel.findOne({ _id: id });
+    };
     list = () => {
         return this.userModel.find();
     };

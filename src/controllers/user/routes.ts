@@ -1,12 +1,18 @@
 import { Router } from 'express';
 import UserController from '../user/Controllers';
+import authMoiddleWare from '../../libs/routes/authMiddleWare';
+import validation from './validation';
+import validationHandler from '../../libs/routes/validationHandler';
 
 const UserRouter = Router();
 
 UserRouter.route('/')
-    .get(UserController.list)
-    .post(UserController.create)
-    .put(UserController.update);
+    .get(authMoiddleWare('getUsers', 'read'), validationHandler(validation.get), UserController.list)
+    .post(authMoiddleWare('getUsers', 'read'), validationHandler(validation.create), UserController.create)
+    .put(authMoiddleWare('getUsers', 'read'), validationHandler(validation.delete), UserController.update);
 UserRouter.route('/:id')
-    .delete(UserController.delete);
-export default UserRouter;
+    .delete(authMoiddleWare('getUsers', 'read'), validationHandler(validation.update), UserController.delete);
+   UserRouter.route('/me')
+    .get(authMoiddleWare('getUsers', 'read'), validationHandler(validation.get), UserController.me);
+
+    export default UserRouter;

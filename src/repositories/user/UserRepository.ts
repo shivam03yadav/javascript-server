@@ -1,4 +1,3 @@
-
 import IUserModel from './IUserModel';
 import * as Mongoose from 'mongoose';
 import { userModel } from './UserModel';
@@ -20,7 +19,7 @@ class UserRepository {
     }
 
     update = (id: string, data: any) => {
-        return this.userModel.findByIdAndUpdate(id, data);
+        return this.userModel.findOneAndUpdate({_id: id}, data);
     };
 
     list = () => {

@@ -9,11 +9,11 @@ class Database {
                     reject(err);
                 }
                 console.log('database connected at : ', mongoUri);
+                seedData();
                 resolve();
             });
         });
         return promise;
-
     }
     static disconnect = () => {
         mongoose.connection.close();

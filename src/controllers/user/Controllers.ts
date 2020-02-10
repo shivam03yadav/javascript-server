@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UserRepository from '../../ repositories/user /UserRepository';
+import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
 
 class UserController {
@@ -17,10 +17,10 @@ class UserController {
 
     create = (req: Request , res: Response ) => {
 
-        console.log('::CREATE USER:::::');
+        console.log(':::::::::::::::::::CREATE USER:::::::::::::::::::');
 
         const userData = req.body;
-
+        console.log(userData);
         this.userRepository.create(userData)
 
         .then((user: any) => {
@@ -33,7 +33,7 @@ class UserController {
     }
 
     update = (req: Request , res: Response ) => {
-        console.log('::UPDATE USER:::::');
+        console.log(':::::::::::::::::::UPDATE USER:::::::::::::::::::');
 
         const userData = req.body;
 
@@ -61,7 +61,7 @@ class UserController {
         });
     }
     delete = (req: Request , res: Response ) => {
-        console.log('::Delete USER:::::');
+        console.log(':::::::::::::::::::Delete USER:::::::::::::::::::');
 
         const userData = req.params;
 

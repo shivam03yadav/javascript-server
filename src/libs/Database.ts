@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import seedData from './seedData';
 
 class Database {
     static open = (mongoUri: string) => {
@@ -8,11 +9,11 @@ class Database {
                     reject(err);
                 }
                 console.log('database connected at : ', mongoUri);
+                seedData();
                 resolve();
             });
         });
         return promise;
-
     }
     static disconnect = () => {
         mongoose.connection.close();

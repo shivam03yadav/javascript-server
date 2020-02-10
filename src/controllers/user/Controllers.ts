@@ -15,6 +15,14 @@ class UserController {
         return UserController.instance;
     }
 
+    me = (req, res: Response, next) => {
+        try {
+            return SystemResponse.success(res, req.user, 'user Details fetched successfully');
+        } catch (err) {
+            // throw error
+        }
+    }
+
     create = (req: Request, res: Response) => {
 
         console.log(':::::::::::::::::::CREATE USER:::::::::::::::::::');
@@ -48,7 +56,7 @@ class UserController {
             });
     }
     list = (req: Request, res: Response) => {
-        console.log(':::::::::::::::::::USER LIST:::::::::::::::::::');
+        console.log(':::::::::::::::::::USER LIST::::::::::::::::::::');
 
         this.userRepository.list()
 

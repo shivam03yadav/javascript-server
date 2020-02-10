@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { default as TraineeController } from './Controllers';
 import { default as validationHandler } from '../../libs/routes/validationHandler';
-import authMoiddleWare from '../../libs/routes/authMoiddleWare';
+import authMoiddleWare from '../../libs/routes/authMiddleWare';
 import validation from './validation';
 
 const traineeRouter = Router();

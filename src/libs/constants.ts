@@ -8,6 +8,4 @@ const permissions: IPERM = {
         delete: [],
     }
 };
-
-
 export { permissions };

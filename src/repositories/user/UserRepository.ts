@@ -1,39 +1,36 @@
 import IUserModel from './IUserModel';
-import * as Mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 import { userModel } from './UserModel';
+import VersionableRepository from '../versionable/VersionableRepository';
 
-class UserRepository {
+class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IUserModel>> {
 
-    private userModel: Mongoose.Model<IUserModel>;
+    private userModel: mongoose.Model<IUserModel>;
 
     constructor() {
-        this.userModel = userModel;
+        super(userModel);
     }
+
 
     create = (data: any) => {
-        return this.userModel.create(data);
+        return super.create(data);
     };
-
-    count = () => {
-        return this.userModel.countDocuments();
+    count1 = () => {
+        return super.count();
     }
-
-    update = (id: string, data: any) => {
-        return this.userModel.findOneAndUpdate({ _id: id }, data);
-    };
-    findOne = (id: string) => {
-        return this.userModel.findOne({ _id: id });
-    };
-    list = () => {
-        return this.userModel.find();
-    };
-
-    delete = (id: string) => {
+    update1 = (id: string, data: any) => {
+        return super.update(id, data);
+    }
+    list1 = () => {
+        return super.list();
+    }
+    delete1 = (id: string) => {
         if (id !== undefined) {
-            return this.userModel.deleteOne({ id });
+            return super.delete(id);
         } else {
-            console.log('please enter the id');
+            console.log('Please enter Id');
         }
-    }
+    };
+
 }
 export default UserRepository;

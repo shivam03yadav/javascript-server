@@ -1,14 +1,5 @@
 const validation = {
     create: {
-        id: {
-            required: true,
-            string: true,
-            in: ['body'],
-            custom: (value: any) => {
-                console.log('Value', value);
-                throw { error: 'Error Occured', message: 'Message' };
-            }
-        },
         name: {
             required: true,
             regex: /^[a-zA-Z]+(([,. -][a-zA-Z ])?[a-zA-Z]*)*$/,
@@ -74,10 +65,13 @@ const validation = {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (dataToUpdate: any) => {
-                console.log('Value', dataToUpdate);
-                throw { error: 'Error Occured', message: 'Message' };
-            },
+            errorMessage: 'Data is invalid',
+            custom: (value: any): boolean => {
+                if (typeof value !== 'object') {
+                    return true;
+                }
+                return false;
+            }
         }
     }
 };

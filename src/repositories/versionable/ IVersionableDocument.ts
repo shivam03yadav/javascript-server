@@ -2,11 +2,11 @@ import * as mongoose from 'mongoose';
 
 interface IVersionableModel extends mongoose.Document {
     createdAt: Date;
-    createdBY: string;
+    createdBy: string;
     updatedAt: Date;
-    updatedBY: string;
+    updatedBy: string;
     deletedAt: Date;
-    deletedBY: string;
+    deletedBy: string;
     originalId: any;
 
 }

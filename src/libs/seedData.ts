@@ -11,13 +11,13 @@ export default () =>
         }
         console.log('data is seeding');
         const user = {
-            name: 'Trainee',
+            name: 'Shivam Yadav',
             address: 'Noida',
             email: 'shivam.yadav@successive.tech',
             password: hash,
             Dob: '05/03/1999',
             mobileNumber: 9599633437,
-            role: 'trainee',
+            role: 'head-trainer',
             hobbies: ['sketching', 'cricket'],
         };
 

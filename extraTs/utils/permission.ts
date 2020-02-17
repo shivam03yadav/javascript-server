@@ -1,21 +1,24 @@
 import { permission } from '../constant';
-const hasPermission = (moduleName: string, role: string, permissionType: string): boolean => {
+
+export default function hasPermission(moduleName: string, role: string, permissionType: string): boolean {
    console.log('hasPermission', moduleName, role, permissionType);
-
-   const data: any = permission[moduleName];
-   if (!permission || !data[permissionType]) {
-      console.log(`${role} doesn't have permission to ${permissionType}`);
+   if (permission[moduleName] === undefined)
       return false;
-   }
-   if (data[permissionType].includes(role)) {
-      console.log(`${role} has permission to ${permissionType}`);
-      return true;
-   }
-   else
-      console.log(`${role} doesn't have permission to ${permissionType}`);
+   const data = permission[moduleName];
+   let tmp: boolean = false;
+   if (data[permissionType] === undefined)
+      return false;
+   data.all.forEach(element => {
+      if (element === role)
+         tmp = true;
+   });
+   data[permissionType].forEach(element => {
+      if (element === role) {
+         tmp = true;
+      }
+   });
+   return tmp;
+}
 
-};
-
-export default hasPermission;
 
 

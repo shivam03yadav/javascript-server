@@ -6,5 +6,6 @@ interface IAUTH {
 }
 interface IPERM {
     getUsers: IAUTH;
+    Users: IAUTH;
 }
 export default IPERM;

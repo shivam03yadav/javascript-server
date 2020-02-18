@@ -45,7 +45,7 @@ class UserController {
 
         const userData = req.body;
 
-        this.userRepository.update(userData.id, userData)
+        this.userRepository.update(userData.id, userData.dataToUpdate)
 
             .then((user: any) => {
                 return SystemResponse.success(res, user, 'User Updated Successfully');

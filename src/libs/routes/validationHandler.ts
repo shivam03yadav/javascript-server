@@ -22,9 +22,10 @@ export default (config: any) => {
                 }
             }
             if (config[key].custom !== undefined) {
-                if (config[key].custom(reqMethod, req, res, next) === 'Not an Object') {
-                    errorArray.push({ message: `${key} is invalid` });
+                if (config[key].custom(req[reqMethod].dataToUpdate)) {
+                    errorArray.push({error: 'Error Occured', message: config[key].errorMessage });
                 }
+                console.log('valid data');
             }
         });
         console.log(errorArray);

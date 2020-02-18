@@ -6,6 +6,12 @@ const permissions: IPERM = {
         read: ['trainee', 'trainer'],
         write: ['trainer'],
         delete: [],
+    },
+    'Users': {
+        all: ['head-trainer'],
+        read: ['trainee', 'trainer'],
+        write: ['trainer'],
+        delete: [],
     }
 };
 export { permissions };

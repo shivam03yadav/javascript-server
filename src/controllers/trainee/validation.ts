@@ -1,21 +1,36 @@
-import { NextFunction } from 'express';
-
 const validation = {
     create: {
-        id: {
-            required: true,
-            errorMessage: 'Id is required',
-            string: true,
-            regex: /^[a-zA-Z0-9_.-]*$/,
-            in: ['body'],
-        },
         name: {
             required: true,
-            string: true,
-            regex: /^[A-Za-z]+$/,
+            regex: /^[a-zA-Z]+(([,. -][a-zA-Z ])?[a-zA-Z]*)*$/,
             in: ['body'],
             errorMessage: 'Name is required',
-        }
+        },
+        address: {
+            required: true,
+            in: ['body'],
+            string: true,
+            errorMessage: 'Address is required',
+        },
+        email: {
+            required: true,
+            string: true,
+            regex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((successive.tech))$/,
+            in: ['body'],
+            errorMessage: 'Email is required',
+        },
+        mobileNumber: {
+            required: true,
+            number: true,
+            in: ['body'],
+            errorMessage: 'Number is required',
+        },
+        hobbies: {
+            in: ['body'],
+            required: true,
+            isObject: true,
+            errorMessage: 'hobbies is required'
+        },
     },
     delete: {
         id: {
@@ -29,47 +44,35 @@ const validation = {
             required: false,
             default: 0,
             number: true,
-            regex: /^[0-9]*$/,
             in: ['query'],
-            errorMessage: 'invalid skip',
-            custom: (reqMethod, req: Request, res: Response, next: NextFunction): void => {
-                if (req[reqMethod].skip === undefined) {
-                    req[reqMethod].skip = '0';
-                }
-            }
+            errorMessage: 'Skip is invalid',
         },
         limit: {
             required: false,
             default: 10,
-            regex: /^[0-9]*$/,
             number: true,
             in: ['query'],
-            errorMessage: 'invalid limit',
-            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
-                if (req[reqMethod].limit === undefined) {
-                    req[reqMethod].limit = '10';
-                }
-            }
+            errorMessage: 'Limit is invalid',
         }
     },
-    update: {  // put
+    update: {
         id: {
             required: true,
             string: true,
-            regex: /^[a-zA-Z0-9_.-]*$/,
             in: ['body']
         },
         dataToUpdate: {
             in: ['body'],
             required: true,
             isObject: true,
-            custom: (reqMethod: any, req: Request, res: Response, next: NextFunction): void => {
-                if (typeof req[reqMethod] !== 'object') {
-                    return next({ error: 'Error Found', message: 'Not an Object' });
+            errorMessage: 'Data is invalid',
+            custom: (value: any): boolean => {
+                if (typeof value !== 'object') {
+                    return true;
                 }
-            },
+                return false;
+            }
         }
     }
 };
-
 export default validation;

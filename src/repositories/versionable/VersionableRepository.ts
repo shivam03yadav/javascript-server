@@ -20,33 +20,33 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return this.modelType.findOne(query);
     }
 
-    public async create(options): Promise<D> {
+    public async create(options, userId): Promise<D> {
         const id = this.getObjectId();
         return this.modelType.create({
             ...options,
             _id: id,
             originalId: id,
             createdAt: Date.now(),
-            createdBy: id
+            createdBy: userId
         });
 
     }
-    public async update(id, options): Promise<D> {
+    public async update(id, options, userId): Promise<D> {
         console.log(options);
-        const ID = this.getObjectId();
-        await this.newUpdatedData(id);
+        const iD = this.getObjectId();
+        await this.newUpdatedData(id, undefined);
         return this.modelType.create({
             ...options,
-            _id: ID,
+            _id: iD,
             originalId: id,
             updatedAt: Date.now(),
-            updatedBy: id
+            updatedBy: userId
         });
     }
-    public async newUpdatedData(id): Promise<D> {
+    public async newUpdatedData(id, userId): Promise<D> {
         const data = await this.modelType.findByIdAndUpdate(id, {
             deletedAt: Date.now(),
-            deletedBy: id
+            deletedBy: userId
         });
         return data;
     }
@@ -55,7 +55,7 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return this.modelType.find();
     }
 
-    public async delete(id: string) {
-        await this.newUpdatedData(id);
+    public async delete(id: string, userId) {
+        await this.newUpdatedData(id, userId);
     }
 }

@@ -15,6 +15,9 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     public count() {
         return this.modelType.countDocuments();
     }
+    public countTrainee() {
+        return this.modelType.countDocuments({ role: 'trainee', deletedAt: { $exists: false } });
+    }
 
     public findOne(query) {
         return this.modelType.findOne(query);
@@ -51,8 +54,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return data;
     }
 
-    public async list() {
-        return this.modelType.find();
+    public async list(sortBy, userRole, skip, limit) {
+        return this.modelType.find({ role: userRole, deletedAt: undefined }).sort(sortBy).skip(Number(skip)).limit(Number(limit));
     }
 
     public async delete(id: string, userId) {

@@ -21,8 +21,8 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
     update1 = (id: string, data: any) => {
         return super.update(id, data, undefined);
     }
-    list1 = () => {
-        return super.list();
+    list1 = (sortBy, role, skip, limit) => {
+        return super.list(sortBy, role, skip, limit);
     }
     delete1 = (id: string, userId) => {
         if (id !== undefined) {

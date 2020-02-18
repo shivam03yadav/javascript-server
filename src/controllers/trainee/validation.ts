@@ -19,6 +19,12 @@ const validation = {
             in: ['body'],
             errorMessage: 'Email is required',
         },
+        password: {
+            required: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'please enter password',
+        },
         mobileNumber: {
             required: true,
             number: true,

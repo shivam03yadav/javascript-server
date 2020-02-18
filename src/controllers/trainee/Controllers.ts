@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
+import * as bcrypt from 'bcrypt';
 
 
 class TraineeController {
@@ -22,7 +23,8 @@ class TraineeController {
         try {
             const userData = req.body;
             const userId = req.user._id;
-            const user = await this.userRepository.create(userData, userId);
+            const hash = await bcrypt.hash(userData.password, 10);
+            const user = await this.userRepository.create({ ...userData, password: hash}, userId);
             if (user) {
                 return SystemResponse.success(res, user, 'User Added Successfully');
             }

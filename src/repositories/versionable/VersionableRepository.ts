@@ -23,14 +23,14 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return this.modelType.findOne(query);
     }
 
-    public async create(options, userId): Promise<D> {
+    public async create(options): Promise<D> {
         const id = this.getObjectId();
         return this.modelType.create({
             ...options,
             _id: id,
             originalId: id,
             createdAt: Date.now(),
-            createdBy: userId
+            createdBy: id
         });
 
     }

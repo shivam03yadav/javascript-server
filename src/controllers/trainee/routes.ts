@@ -4,12 +4,14 @@ import { default as validationHandler } from '../../libs/routes/validationHandle
 import authMoiddleWare from '../../libs/routes/authMiddleWare';
 import validation from './validation';
 
+console.log('i am routes inside trainee ');
+
+
 const traineeRouter = Router();
 traineeRouter.route('/')
     .get(authMoiddleWare('getUsers', 'read'), validationHandler(validation.get), TraineeController.list)
-    .post(authMoiddleWare('getUsers', 'write'), validationHandler(validation.create), TraineeController.create)
-    .put(authMoiddleWare('getUsers', 'write'), validationHandler(validation.update), TraineeController.update);
-    traineeRouter.route('/:id')
-    .delete(authMoiddleWare('getUsers', 'delete'), validationHandler(validation.delete), TraineeController.delete);
-
+    .post(authMoiddleWare('getUsers', 'read'), validationHandler(validation.create), TraineeController.create)
+    .delete(authMoiddleWare('getUsers', 'read'), validationHandler(validation.delete), TraineeController.delete);
+traineeRouter.route('/:id')
+    .put(authMoiddleWare('getUsers', 'read'), validationHandler(validation.update), TraineeController.update);
 export default traineeRouter;

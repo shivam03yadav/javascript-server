@@ -1,17 +1,5 @@
 const validation = {
     create: {
-        name: {
-            required: true,
-            regex: /^[a-zA-Z]+(([,. -][a-zA-Z ])?[a-zA-Z]*)*$/,
-            in: ['body'],
-            errorMessage: 'Name is required',
-        },
-        address: {
-            required: true,
-            in: ['body'],
-            string: true,
-            errorMessage: 'Address is required',
-        },
         email: {
             required: true,
             string: true,

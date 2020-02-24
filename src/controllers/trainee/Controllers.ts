@@ -22,9 +22,8 @@ class TraineeController {
         console.log(':::::::::::::::::::CREATE USER:::::::::::::::::::');
         try {
             const userData = req.body;
-            const userId = req.user._id;
             const hash = await bcrypt.hash(userData.password, 10);
-            const user = await this.userRepository.create({ ...userData, password: hash }, userId);
+            const user = await this.userRepository.create({ ...userData, password: hash });
             if (user) {
                 return SystemResponse.success(res, user, 'User Added Successfully');
             }

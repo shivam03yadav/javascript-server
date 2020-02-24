@@ -26,7 +26,7 @@ export default () =>
             console.log('Count of Users is', count);
 
             if (!count) {
-                return userRepository.create(user, undefined)
+                return userRepository.create(user)
                     .then((res) => {
                         console.log('User Seeded Successfully', res);
                     });

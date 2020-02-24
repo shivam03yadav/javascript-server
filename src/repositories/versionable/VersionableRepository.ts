@@ -54,8 +54,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return data;
     }
 
-    public async list(sortBy, userRole, skip, limit) {
-        return this.modelType.find({ role: userRole, deletedAt: undefined }).sort(sortBy).skip(Number(skip)).limit(Number(limit));
+    public async list(userRole, skip, limit, sortBy, searchBy) {
+        return this.modelType.find({ role: userRole, deletedAt: undefined, ...searchBy }).sort(sortBy).skip(Number(skip)).limit(Number(limit));
     }
 
     public async delete(id: string, userId) {

@@ -67,7 +67,7 @@ class TraineeController {
             };
         }
         try {
-            const user = await this.userRepository.list1(sortBy, 'trainee', req.query.skip, req.query.limit);
+            const user = await this.userRepository.list(sortBy, 'trainee', req.query.skip, req.query.limit);
             const countTrainee = await this.userRepository.countTrainee();
             const trainee = {
                 count: countTrainee,

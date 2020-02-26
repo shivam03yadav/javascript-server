@@ -3,10 +3,6 @@ import { default as TraineeController } from './Controllers';
 import { default as validationHandler } from '../../libs/routes/validationHandler';
 import authMoiddleWare from '../../libs/routes/authMiddleWare';
 import validation from './validation';
-
-console.log('i am routes inside trainee ');
-
-
 const traineeRouter = Router();
 traineeRouter.route('/')
     .get(authMoiddleWare('getUsers', 'read'), validationHandler(validation.get), TraineeController.list)

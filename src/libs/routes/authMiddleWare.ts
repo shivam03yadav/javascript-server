@@ -2,7 +2,6 @@ import * as jwt from 'jsonwebtoken';
 import configuration from '../../config/configuration';
 import hasPermission from '../../../extraTs/utils/permission';
 import { Request, Response, NextFunction } from 'express';
-import userRepository from '../../repositories/user/UserRepository';
 import IUserModel from '../../repositories/user/IUserModel';
 import UserRepository from '../../repositories/user/UserRepository';
 

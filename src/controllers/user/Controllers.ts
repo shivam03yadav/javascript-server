@@ -20,10 +20,9 @@ class UserController {
 
     login = async (req: any, res: Response, next: any) => {
         try {
-            console.log('inside login' );
             const { email, password } = req.body;
-            console.log(req.body , '--------------------------------' );
             const user = await this.userRepository.findOne({ email });
+            console.log(user);
             if (!user) {
                 return next({
                     error: 'User not found',

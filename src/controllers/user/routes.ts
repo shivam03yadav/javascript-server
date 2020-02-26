@@ -5,8 +5,6 @@ import validation from './validation';
 import validationHandler from '../../libs/routes/validationHandler';
 
 const UserRouter = Router();
-
-UserRouter.route('/');
 UserRouter.route('/me')
    .get(authMoiddleWare('getUsers', 'all'), validationHandler(validation.get), UserController.me);
 UserRouter.route('/login')

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import UserRepository from '../../repositories/user/UserRepository';
 import SystemResponse from '../../libs/SystemResponse';
+import * as bcrypt from 'bcrypt';
 
 
 class TraineeController {
@@ -21,8 +22,8 @@ class TraineeController {
         console.log(':::::::::::::::::::CREATE USER:::::::::::::::::::');
         try {
             const userData = req.body;
-            const userId = req.user._id;
-            const user = await this.userRepository.create(userData, userId);
+            const hash = await bcrypt.hash(userData.password, 10);
+            const user = await this.userRepository.create({ ...userData, password: hash });
             if (user) {
                 return SystemResponse.success(res, user, 'User Added Successfully');
             }
@@ -32,47 +33,69 @@ class TraineeController {
         }
     }
 
-    update = async(req: Request, res: Response) => {
+    update = async (req: Request, res: Response) => {
         console.log(':::::::::::::::::::UPDATE USER:::::::::::::::::::');
-     try {
-        const userData = req.body;
-        const userId = req.user._id;
-        const user = await this.userRepository.update(userData.id, userData.dataToUpdate, userId);
+        try {
+            const userData = req.body;
+            const userId = req.user._id;
+            const user = await this.userRepository.update(userData.id, userData.dataToUpdate, userId);
             if (user) {
                 return SystemResponse.success(res, user, 'User Updated Successfully');
             }
         }
-            catch (error) {
-                return SystemResponse.error(res, error, 'User Updated UnSuccessfull');
-            }
+        catch (error) {
+            return SystemResponse.error(res, error, 'User Updated UnSuccessfull');
+        }
     }
     list = async (req: Request, res: Response) => {
         console.log(':::::::::::::::::::USER LIST::::::::::::::::::::');
-      try {
-       const user = await this.userRepository.list();
+        let sortBy;
+        if (req.query.sortBy === 'email') {
+            sortBy = {
+                email: 1
+            };
+
+        }
+        else if (req.query.sortBy === 'name') {
+            sortBy = {
+                name: 1
+            };
+        }
+        else {
+            sortBy = {
+                updatedAt: 1
+            };
+        }
+        try {
+            const user = await this.userRepository.list(sortBy, 'trainee', req.query.skip, req.query.limit);
+            const countTrainee = await this.userRepository.countTrainee();
+            const trainee = {
+                count: countTrainee,
+                records: user,
+            };
             if (user) {
-                return SystemResponse.success(res, user, 'List Of Users');
+                return SystemResponse.success(res, trainee, 'List Of Users');
             }
         }
 
-            catch (error) {
-                return SystemResponse.error(res, error, 'No List Exist');
-            }
+        catch (error) {
+            return SystemResponse.error(res, error, 'No List Exist');
+        }
     }
     delete = async (req: Request, res: Response) => {
         console.log(':::::::::::::::::::Delete USER:::::::::::::::::::');
-     try {
-        const userData = req.params;
-        const userId = req.user._id;
-       const user: any = await this.userRepository.delete(userData.id, userId);
+        try {
+            const userData = req.params;
+            const userId = req.user._id;
+            const user: any = await this.userRepository.delete(userData.id, userId);
 
             if (user) {
                 return SystemResponse.success(res, user, 'User Deleted Successfully');
             }
         }
-            catch (error) {
-                return SystemResponse.error(res, error, 'User Deleted UnSuccessfull');
-            }
+        catch (error) {
+            return SystemResponse.error(res, error, 'User Deleted UnSuccessfull');
+        }
     }
 }
 

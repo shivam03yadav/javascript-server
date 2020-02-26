@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import IVersionableModel from './ IVersionableDocument';
 
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
 
@@ -15,19 +14,22 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
     public count() {
         return this.modelType.countDocuments();
     }
+    public countTrainee() {
+        return this.modelType.countDocuments({ role: 'trainee', deletedAt: { $exists: false } });
+    }
 
     public findOne(query) {
         return this.modelType.findOne(query);
     }
 
-    public async create(options, userId): Promise<D> {
+    public async create(options): Promise<D> {
         const id = this.getObjectId();
         return this.modelType.create({
             ...options,
             _id: id,
             originalId: id,
             createdAt: Date.now(),
-            createdBy: userId
+            createdBy: id
         });
 
     }
@@ -51,8 +53,8 @@ export default class VersionableRepository<D extends mongoose.Document, M extend
         return data;
     }
 
-    public async list() {
-        return this.modelType.find();
+    public async list(sortBy, userRole, skip, limit) {
+        return this.modelType.find({ role: userRole, deletedAt: undefined }).sort(sortBy).skip(Number(skip)).limit(Number(limit));
     }
 
     public async delete(id: string, userId) {

@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import IVersionableModel from './ IVersionableDocument';
 
 export default class VersionableRepository<D extends mongoose.Document, M extends mongoose.Model<D>> {
 

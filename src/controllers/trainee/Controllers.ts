@@ -60,8 +60,8 @@ class TraineeController {
                 sortBy = { updatedAt: 1 };
             }
             if (req.query.search !== undefined) {
-                user = await this.userRepository.list1('trainee', req.query.skip, req.query.limit, sortBy, { name: { $regex: req.query.search.toLowerCase() } });
-                const List = await this.userRepository.list1('trainee', req.query.skip, req.query.limit, sortBy, { email: { $regex: req.query.search.toLowerCase() } });
+                user = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, { name: { $regex: req.query.search.toLowerCase() } });
+                const List = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, { email: { $regex: req.query.search.toLowerCase() } });
                 user = { ...user, ...List };
             } else {
                 user = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, {});

@@ -10,11 +10,9 @@ class UserRepository extends VersionableRepository<IUserModel, mongoose.Model<IU
     constructor() {
         super(userModel);
     }
-
-
     createUser = (data: any, userId) => {
         return super.create(data);
-    };
+    }
     count = () => {
         return super.count();
     }

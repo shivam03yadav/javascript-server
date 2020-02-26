@@ -173,7 +173,7 @@ traineeRouter.route('/')
  *       200:
  *         description: User created successfully
  *         schema:
- *              allOf:
+ *              oneOf:
  *              properties:
  *                  status:
  *                      example: Ok
@@ -204,86 +204,86 @@ traineeRouter.route('/')
 traineeRouter.route('/:id')
 
 
-/**
- * @swagger
- *
- * /api/trainee/{id}:
- *   delete:
- *     description: Returns the success reponse on creation
- *     security:
- *       - Bearer: []
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         description: id of user to be deleted.
- *         in: path
- *         required: true
- *         type: string
- *         example: 5e4e6e93c095d84d34045a30
- *     responses:
- *       200:
- *         description: Data deleted
- *         schema:
- *              allOf:
- *              properties:
- *                  status:
- *                      example: Ok
- *              message:
- *                      example: User data successfully deleted
- *              data:
- *                      example: 5e4e6e93c095d84d34045a30
- *       403:
- *         description: unauthorised access
- *         schema:
- *              $ref: '#/definitions/Unauthorized'
- */
-    .delete(authMoiddleWare('getUsers', 'read'), validationHandler(validation.delete), TraineeController.delete)
+    /**
+     * @swagger
+     *
+     * /api/trainee/{id}:
+     *   delete:
+     *     description: Returns the success reponse on creation
+     *     security:
+     *       - Bearer: []
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: id
+     *         description: id of user to be deleted.
+     *         in: path
+     *         required: true
+     *         type: string
+     *         example: 5e4e6e93c095d84d34045a30
+     *     responses:
+     *       200:
+     *         description: Data deleted
+     *         schema:
+     *              allOf:
+     *              properties:
+     *                  status:
+     *                      example: Ok
+     *              message:
+     *                      example: User data successfully deleted
+     *              data:
+     *                      example: 5e4e6e93c095d84d34045a30
+     *       403:
+     *         description: unauthorised access
+     *         schema:
+     *              $ref: '#/definitions/Unauthorized'
+     */
+        .delete(authMoiddleWare('getUsers', 'read'), validationHandler(validation.delete), TraineeController.delete)
 
-/**
- * @swagger
- *
- * /api/trainee:
- *   put:
- *     description: Returns the success reponse on creation
- *     security:
- *          - Bearer: []
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: User
- *         description: User's Data.
- *         in: body
- *         required: true
- *         type: object
- *         schema:
- *          allOf:
- *          properties:
- *              id:
- *                  example: 5e4e6e93c095d84d34045a30
- *              dataToUpdate:
- *                  type: object
- *                  allOf:
- *                      - $ref: '#/definitions/TraineePost'
- *     responses:
- *       200:
- *         description: user data successfully updated
- *         schema:
- *              allOf:
- *              properties:
- *                  status:
- *                      example: Ok
- *                  message:
- *                      example: User data successfully Updated
- *                  data:
- *                      type: object
- *                      allOf:
- *                          - $ref: '#/definitions/TraineeResponse'
- *       403:
- *         description: unauthorised access
- *         schema:
- *              $ref: '#/definitions/Unauthorized'
- */
+    /**
+     * @swagger
+     *
+     * /api/trainee:
+     *   put:
+     *     description: Returns the success reponse on creation
+     *     security:
+     *          - Bearer: []
+     *     produces:
+     *       - application/json
+     *     parameters:
+     *       - name: User
+     *         description: User's Data.
+     *         in: body
+     *         required: true
+     *         type: object
+     *         schema:
+     *          oneOf:
+     *          properties:
+     *              id:
+     *                  example: 5e4e6e93c095d84d34045a30
+     *              dataToUpdate:
+     *                  type: object
+     *                  allOf:
+     *                      - $ref: '#/definitions/TraineePost'
+     *     responses:
+     *       200:
+     *         description: user data successfully updated
+     *         schema:
+     *              oneOf:
+     *              properties:
+     *                  status:
+     *                      example: Ok
+     *                  message:
+     *                      example: User data successfully Updated
+     *                  data:
+     *                      type: object
+     *                      allOf:
+     *                          - $ref: '#/definitions/TraineeResponse'
+     *       403:
+     *         description: unauthorised access
+     *         schema:
+     *              $ref: '#/definitions/Unauthorized'
+     */
 
 
     .put(authMoiddleWare('getUsers', 'all'), validationHandler(validation.update), TraineeController.update);

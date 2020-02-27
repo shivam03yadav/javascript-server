@@ -49,32 +49,34 @@ class TraineeController {
     }
     list = async (req: Request, res: Response) => {
         console.log(':::::::::::::::::::USER LIST::::::::::::::::::::');
-        let sortBy;
-        if (req.query.sortBy === 'email') {
-            sortBy = {
-                email: 1
-            };
-
-        }
-        else if (req.query.sortBy === 'name') {
-            sortBy = {
-                name: 1
-            };
-        }
-        else {
-            sortBy = {
-                updatedAt: 1
-            };
-        }
         try {
-            const user = await this.userRepository.list(sortBy, 'trainee', req.query.skip, req.query.limit);
+            let user;
+            console.log('::::::::::::::::::::-INSIDE LIST TRAINEE-::::::::::::::::::::');
+            let sortBy = {};
+            if (req.query.sortBy) {
+                sortBy[req.query.sortBy] = 1;
+            }
+            else {
+                sortBy = { updatedAt: 1 };
+            }
+            if (req.query.search !== undefined) {
+                user = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, { name: { $regex: req.query.search.toLowerCase() } });
+                const List = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, { email: { $regex: req.query.search.toLowerCase() } });
+                user = { ...user, ...List };
+            } else {
+                user = await this.userRepository.list('trainee', req.query.skip, req.query.limit, sortBy, {});
+            }
             const countTrainee = await this.userRepository.countTrainee();
             const trainee = {
                 count: countTrainee,
                 records: user,
             };
             if (user) {
-                return SystemResponse.success(res, trainee, 'List Of Users');
+                res.send({
+                    status: 'ok',
+                    message: 'Data Listed Successfully',
+                    users: trainee,
+                });
             }
         }
 

@@ -1,0 +1,60 @@
+{
+  "name": "javascript-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "diamond": "node extra/patterns/diamond.js",
+    "equilateral": "node extra/patterns/equilateral.js",
+    "run-validation": "node extra/utils/validation.js",
+    "run-permission": "node extra/utils/permission.js",
+    "run-extra": "npx babel-node extra",
+    "start:extra": "babel-node extra",
+    "start:server": "tsc-watch --project . --onSuccess \"npm run nodemon\"",
+    "nodemon": "nodemon ./dist/src/index.js",
+    "lint": "./node_modules/tslint/bin/tslint -c tslint.json -p tsconfig.json --exclude 'node_modules/**/*.{j,t}s'",
+    "lint:fix": "npm run lint --fix",
+    "pre-commit": "npm run lint && npm test",
+    "pre-push": "npm run lint && npm test",
+    "commit": "npx git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam03yadav/javascript-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivam03yadav/javascript-server/issues"
+  },
+  "homepage": "https://github.com/shivam03yadav/javascript-server#readme",
+  "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@types/mongoose": "^5.7.0",
+    "@types/node": "^13.5.0",
+    "babel": "^6.23.0",
+    "babel-node": "0.0.1-security",
+    "bcrypt": "^3.0.8",
+    "body-parser": "^1.19.0",
+    "commitizen": "^4.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "husky": "^4.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11",
+    "nodemon": "^2.0.2",
+    "pre-commit": "^1.2.2",
+    "pre-push": "^0.1.1",
+    "swagger": "^0.7.5",
+    "swagger-jsdoc": "^3.5.0",
+    "swagger-ui-express": "^4.1.3",
+    "tslint": "^6.0.0"
+  },
+  "devDependencies": {
+    "tsc-watch": "^4.1.0",
+    "typescript": "^3.7.5"
+  }
+}
